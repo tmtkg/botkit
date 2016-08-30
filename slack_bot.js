@@ -113,7 +113,7 @@ controller.hears(['call me (.*)', 'my name is (.*)'], 'direct_message,direct_men
         }
         user.name = name;
         controller.storage.users.save(user, function(err, id) {
-            bot.reply(message, 'わかったー！ あなたのことは ' + user.name + ' って呼ぶね！');
+            bot.reply(message, 'わかったー！ あなたのことは ' + user.name + ' さんって呼ぶね！');
         });
     });
 });
@@ -126,11 +126,11 @@ controller.hears(['what is my name', 'who am i'], 'direct_message,direct_mention
         } else {
             bot.startConversation(message, function(err, convo) {
                 if (!err) {
-                    convo.say('I do not know your name yet!');
-                    convo.ask('What should I call you?', function(response, convo) {
-                        convo.ask('You want me to call you `' + response.text + '`?', [
+                    convo.say('まだあなたの名前をしらないよ！');
+                    convo.ask('なんて呼んでほしい？', function(response, convo) {
+                        convo.ask('あなたは `' + response.text + '`って呼んでほしいの？（y/n）', [
                             {
-                                pattern: 'yes',
+                                pattern: 'y',
                                 callback: function(response, convo) {
                                     // since no further messages are queued after this,
                                     // the conversation will end naturally with status == 'completed'
@@ -138,7 +138,7 @@ controller.hears(['what is my name', 'who am i'], 'direct_message,direct_mention
                                 }
                             },
                             {
-                                pattern: 'no',
+                                pattern: 'n',
                                 callback: function(response, convo) {
                                     // stop the conversation. this will cause it to end with status == 'stopped'
                                     convo.stop();
@@ -187,7 +187,7 @@ controller.hears(['what is my name', 'who am i'], 'direct_message,direct_mention
 });
 
 
-controller.hears(['shutdown'], 'direct_message,direct_mention,mention', function(bot, message) {
+/*controller.hears(['shutdown'], 'direct_message,direct_mention,mention', function(bot, message) {
 
     bot.startConversation(message, function(err, convo) {
 
@@ -212,7 +212,7 @@ controller.hears(['shutdown'], 'direct_message,direct_mention,mention', function
         }
         ]);
     });
-});
+});*/
 
 
 controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your name'],
