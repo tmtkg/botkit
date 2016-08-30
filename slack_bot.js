@@ -130,7 +130,7 @@ controller.hears(['what is my name', 'who am i'], 'direct_message,direct_mention
                     convo.ask('なんて呼んでほしい？', function(response, convo) {
                         convo.ask('あなたは `' + response.text + '`って呼んでほしいの？（y/n）', [
                             {
-                              if(response.text == 'y') {
+                                pattern: 'y',
                                 callback: function(response, convo) {
                                     // since no further messages are queued after this,
                                     // the conversation will end naturally with status == 'completed'
@@ -185,6 +185,7 @@ controller.hears(['what is my name', 'who am i'], 'direct_message,direct_mention
         }
     });
 });
+
 
 /*controller.hears(['shutdown'], 'direct_message,direct_mention,mention', function(bot, message) {
 
