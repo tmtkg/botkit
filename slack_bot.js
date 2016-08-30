@@ -81,12 +81,12 @@ var bot = controller.spawn({
 }).startRTM();
 
 
-controller.hears(['hello', 'hi'], 'direct_message,direct_mention,mention', function(bot, message) {
+controller.hears(['こんにちは', 'やあ', 'どうも', 'Hello', 'hi'], 'direct_message,direct_mention,mention', function(bot, message) {
 
     bot.api.reactions.add({
         timestamp: message.ts,
         channel: message.channel,
-        name: 'robot_face',
+        name: 'cat',
     }, function(err, res) {
         if (err) {
             bot.botkit.log('Failed to add emoji reaction :(', err);
@@ -96,9 +96,9 @@ controller.hears(['hello', 'hi'], 'direct_message,direct_mention,mention', funct
 
     controller.storage.users.get(message.user, function(err, user) {
         if (user && user.name) {
-            bot.reply(message, 'Hello ' + user.name + '!!');
+            bot.reply(message, 'こんにちは ' + user.name + 'さん!!');
         } else {
-            bot.reply(message, 'Hello.');
+            bot.reply(message, 'こんにちは！');
         }
     });
 });
@@ -113,7 +113,7 @@ controller.hears(['call me (.*)', 'my name is (.*)'], 'direct_message,direct_men
         }
         user.name = name;
         controller.storage.users.save(user, function(err, id) {
-            bot.reply(message, 'Got it. I will call you ' + user.name + ' from now on.');
+            bot.reply(message, 'わかったー！ あなたのことは ' + user.name + ' って呼ぶね！');
         });
     });
 });
@@ -122,7 +122,7 @@ controller.hears(['what is my name', 'who am i'], 'direct_message,direct_mention
 
     controller.storage.users.get(message.user, function(err, user) {
         if (user && user.name) {
-            bot.reply(message, 'Your name is ' + user.name);
+            bot.reply(message, 'あなたは ' + user.name + 'さんだよね！');
         } else {
             bot.startConversation(message, function(err, convo) {
                 if (!err) {
@@ -177,7 +177,7 @@ controller.hears(['what is my name', 'who am i'], 'direct_message,direct_mention
 
                         } else {
                             // this happens if the conversation ended prematurely for some reason
-                            bot.reply(message, 'OK, nevermind!');
+                            bot.reply(message, 'はーい！おぼえたよ！');
                         }
                     });
                 }
