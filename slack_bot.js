@@ -130,7 +130,7 @@ controller.hears(['what is my name', 'who am i'], 'direct_message,direct_mention
                     convo.ask('なんて呼んでほしい？', function(response, convo) {
                         convo.ask('あなたは `' + response.text + '`って呼んでほしいの？（y/n）', [
                             {
-                              if(response.text == 'y','yes','はい', 'うん') {
+                              if(response.text == 'y') {
                                 callback: function(response, convo) {
                                     // since no further messages are queued after this,
                                     // the conversation will end naturally with status == 'completed'
@@ -138,7 +138,7 @@ controller.hears(['what is my name', 'who am i'], 'direct_message,direct_mention
                                 }
                             },
                             {
-                                pattern: 'n', 'いいえ', 'no',
+                                pattern: 'n',
                                 callback: function(response, convo) {
                                     // stop the conversation. this will cause it to end with status == 'stopped'
                                     convo.stop();
@@ -186,14 +186,14 @@ controller.hears(['what is my name', 'who am i'], 'direct_message,direct_mention
     });
 });
 
-controller.hears('こんばんは', '残業','こんばん', function(bot,message) {
+controller.hears(['こんばんは', '残業','こんばん'], function(bot,message) {
 //    console.log(message);
     askNight = function(response, convo) {
 //        console.log(response);
         convo.ask('こんばんは、'+ user.name + 'さん！ 今日は遅いの？', function(response, convo) {
 //            console.log(response);
             convo.say('おつかれさま！');
-            if(response.text == 'y','yes','はい', 'うん') {
+            if(response.text == ['y','yes','はい', 'うん']) {
                 askZangyo(response, convo);
             }
             convo.next();
@@ -202,7 +202,7 @@ controller.hears('こんばんは', '残業','こんばん', function(bot,messag
 
     askZangyo = function(response, convo) {
         convo.ask('おなかすいた？', function(response, convo) {
-            if(response.text == 'y','yes','はい', 'うん') {
+            if(response.text == ['y','yes','はい', 'うん']) {
                 convo.say('あげる！　http://sheba.jp/product/duo/');
             } else {
                 convo.say('そっか〜、、がんばってね〜');
