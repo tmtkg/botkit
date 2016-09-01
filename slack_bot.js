@@ -193,6 +193,30 @@ controller.hears(['what is my name', 'who am i'], 'direct_message,direct_mention
     });
 });
 
+controller.hears(['明日の天気'],'ambient',function(bot,message) {
+    var cmd = "curl --stderr /dev/null http://weather.livedoor.com/forecast/webservice/json/v1?city=130010|/app/user/bin/jq .forecasts[1]";
+    function shspawn(command) {
+      return spawn('sh', ['-c', command]);
+    }
+    var child = shspawn(cmd);
+    var buf="";
+
+    child.stdout.on('data',function(data){
+      buf=buf+data;
+    });
+    child.stderr.on('data',function (data){
+      console.log('exec error: '+data);
+    });
+
+    child.on('close',function(code) {
+      // コマンド実行後の処理
+      // codeでコマンドの実行の成否が確認できる。
+      // この時点でbufに正常時はコマンドの出力結果が入っている。
+      //console.dir(buf);
+        bot.reply(message,buf);
+    });
+});
+
 
 /*controller.hears(['shutdown'], 'direct_message,direct_mention,mention,ambient', function(bot, message) {
 
