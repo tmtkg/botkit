@@ -80,8 +80,22 @@ var bot = controller.spawn({
     token: process.env.token
 }).startRTM();
 
+controller.hears(['おみくじ'], 'direct_message,direct_mention,mention', function(bot, message) {
+	var rand = Math.floor(Math.random()*5);
+	if (rand == 0) msg = "大吉";
+	if (rand == 1) msg = "中吉";
+	if (rand == 2) msg = "吉";
+	if (rand == 3) msg = "凶";
+	if (rand == 4) msg = "大凶";
+  bot.reply(message,'あなたの運勢は・・・'+ msg +'だよ〜');
+});
+
 controller.hears(['残業', '疲れた', '炎上', 'つらい', '死', '殺', 'しんどい', 'だるい'], 'direct_message,direct_mention,mention,ambient', function(bot, message) {
     bot.reply(message,'~(=^･ω･^)_:tea:　お茶でもどうぞ');
+});
+
+controller.hears(['かわいい','好き','ちゅ','愛し','i love you','i love u','なで','ぺろ','ぽんぽん'], 'direct_message,direct_mention,mention,ambient', function(bot, message) {
+    bot.reply(message,'えへへ〜');
 });
 
 controller.hears(['こんにちは', 'やあ', 'どうも', 'Hello', 'hi'], 'direct_message,direct_mention,mention,ambient', function(bot, message) {
