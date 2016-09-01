@@ -90,7 +90,7 @@ controller.hears(['残業', '疲れた', '炎上', 'つらい', '死', '殺'], '
 
 controller.hears(['こんにちは', 'やあ', 'どうも', 'Hello', 'hi'], 'direct_message,direct_mention,mention,ambient', function(bot, message) {
 
-    bot.api.reactions.add({
+/*    bot.api.reactions.add({
         timestamp: message.ts,
         channel: message.channel,
         name: 'cat',
@@ -99,7 +99,7 @@ controller.hears(['こんにちは', 'やあ', 'どうも', 'Hello', 'hi'], 'dir
             bot.botkit.log('Failed to add emoji reaction :(', err);
         }
     });
-
+*/
 
     controller.storage.users.get(message.user, function(err, user) {
         if (user && user.name) {
@@ -193,7 +193,7 @@ controller.hears(['what is my name', 'who am i'], 'direct_message,direct_mention
     });
 });
 
-controller.hears(['明日の天気'],'ambient',function(bot,message) {
+controller.hears(['明日の天気,あしたの天気'],'direct_message,direct_mention,mention,ambient',function(bot,message) {
     var cmd = "curl --stderr /dev/null http://weather.livedoor.com/forecast/webservice/json/v1?city=130010|/app/user/bin/jq .forecasts[1]";
     function shspawn(command) {
       return spawn('sh', ['-c', command]);
@@ -253,8 +253,8 @@ controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your na
         var uptime = formatUptime(process.uptime());
 
         bot.reply(message,
-            ':robot_face: I am a bot named <@' + bot.identity.name +
-             '>. I have been running for ' + uptime + ' on ' + hostname + '.');
+            ':heart_eyes_cat: わたしの名前は <@' + bot.identity.name +
+             '>です！ 稼働時間は ' + uptime + ' で、 ' + hostname + 'で動いていますよ！');
 
     });
 
