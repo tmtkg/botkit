@@ -191,37 +191,27 @@ controller.hears(['what is my name', 'who am i'], 'direct_message,direct_mention
             });
         }
     });
-
-    controller.hears(['おみくじ'], 'direct_message,direct_mention,mention', function(bot, message) {
-    	var rand = Math.floor(Math.random()*5);
-    	if (rand == 0) msg = "やったあ！大吉";
-    	if (rand == 1) msg = "まあまあかな。。中吉";
-    	if (rand == 2) msg = "にゃー！吉";
-    	if (rand == 3) msg = "むむ。。凶";
-    	if (rand == 4) msg = "にゃー。。。大凶";
-      if (user && user.name) {
-        bot.reply(message, user.name + 'さんの運勢は……'+ msg +'だよ〜！');
-      } else {
-        bot.reply(message,'あなたの運勢は……'+ msg +'だよ〜！');
-        }
-    });
-
-    controller.hears(['食べよう？','食べる？','what my lunch'], 'direct_message,direct_mention,mention', function(bot, message) {
-    	var rand = Math.floor(Math.random()*5);
-    	if (rand == 0) msg = "和食";
-    	if (rand == 1) msg = "中華";
-    	if (rand == 2) msg = "イタリアン";
-    	if (rand == 3) msg = "アジア料理";
-    	if (rand == 4) msg = "喫茶店";
-      if (user && user.name) {
-        bot.reply(message, user.name + 'さんのごはん……'+ msg +'はどうかな？');
-      } else {
-        bot.reply(message,'うーんごはん・・・'+ msg +'なんてどうですか？');
-        }
-    });
-
 });
 
+controller.hears(['おみくじ'], 'direct_message,direct_mention,mention', function(bot, message) {
+  var rand = Math.floor(Math.random()*5);
+  if (rand == 0) msg = "やったあ！大吉";
+  if (rand == 1) msg = "まあまあかな。。中吉";
+  if (rand == 2) msg = "にゃー！吉";
+  if (rand == 3) msg = "むむ。。凶";
+  if (rand == 4) msg = "にゃー。。。大凶";
+  bot.reply(message,'あなたの運勢は……'+ msg +'だよ〜！');
+});
+
+controller.hears(['食べよう？','食べる？','what my lunch'], 'direct_message,direct_mention,mention', function(bot, message) {
+  var rand = Math.floor(Math.random()*5);
+  if (rand == 0) msg = "和食";
+  if (rand == 1) msg = "中華";
+  if (rand == 2) msg = "イタリアン";
+  if (rand == 3) msg = "アジア料理";
+  if (rand == 4) msg = "喫茶店";
+  bot.reply(message,'うーんごはん・・・'+ msg +'なんてどうですか？');
+});
 
 controller.hears(['にゃ', 'meow'], 'direct_message,direct_mention,mention,ambient', function(bot, message) {
     bot.reply(message,'にゃーん！');
