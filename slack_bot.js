@@ -80,11 +80,11 @@ var bot = controller.spawn({
     token: process.env.token
 }).startRTM();
 
-controller.hears(['にゃ', 'meow'], function(bot,message) {
+controller.hears(['にゃ', 'meow'], 'direct_message,direct_mention,mention', function(bot, message) {
     bot.reply(message,'にゃーん！');
 });
 
-controller.hears(['残業', '疲れた', '炎上', 'つらい', '死', '殺'], function(bot,message) {
+controller.hears(['残業', '疲れた', '炎上', 'つらい', '死', '殺'], 'direct_message,direct_mention,mention', function(bot, message) {
     bot.reply(message,'おつかれさまです:cat:');
 });
 
