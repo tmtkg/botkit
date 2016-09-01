@@ -80,15 +80,15 @@ var bot = controller.spawn({
     token: process.env.token
 }).startRTM();
 
-controller.hears(['にゃ', 'meow'], 'message_received', function(bot, message) {
+controller.hears(['にゃ', 'meow'], 'ambient', function(bot, message) {
     bot.reply(message,'にゃーん！');
 });
 
-controller.hears(['残業', '疲れた', '炎上', 'つらい', '死', '殺'], 'message_received', function(bot, message) {
+controller.hears(['残業', '疲れた', '炎上', 'つらい', '死', '殺'], 'ambient', function(bot, message) {
     bot.reply(message,'おつかれさまです:cat:');
 });
 
-controller.hears(['こんにちは', 'やあ', 'どうも', 'Hello', 'hi'], 'message_received', function(bot, message) {
+controller.hears(['こんにちは', 'やあ', 'どうも', 'Hello', 'hi'], 'ambient', function(bot, message) {
 
     bot.api.reactions.add({
         timestamp: message.ts,
@@ -110,7 +110,7 @@ controller.hears(['こんにちは', 'やあ', 'どうも', 'Hello', 'hi'], 'mes
     });
 });
 
-controller.hears(['call me (.*)', 'my name is (.*)'], 'message_received', function(bot, message) {
+controller.hears(['call me (.*)', 'my name is (.*)'], 'ambient', function(bot, message) {
     var name = message.match[1];
     controller.storage.users.get(message.user, function(err, user) {
         if (!user) {
@@ -125,7 +125,7 @@ controller.hears(['call me (.*)', 'my name is (.*)'], 'message_received', functi
     });
 });
 
-controller.hears(['what is my name', 'who am i'], 'message_received', function(bot, message) {
+controller.hears(['what is my name', 'who am i'], 'ambient', function(bot, message) {
 
     controller.storage.users.get(message.user, function(err, user) {
         if (user && user.name) {
@@ -194,7 +194,7 @@ controller.hears(['what is my name', 'who am i'], 'message_received', function(b
 });
 
 
-/*controller.hears(['shutdown'], 'message_received', function(bot, message) {
+/*controller.hears(['shutdown'], 'ambient', function(bot, message) {
 
     bot.startConversation(message, function(err, convo) {
 
@@ -223,7 +223,7 @@ controller.hears(['what is my name', 'who am i'], 'message_received', function(b
 
 
 controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your name'],
-    'message_received', function(bot, message) {
+    'ambient', function(bot, message) {
 
         var hostname = os.hostname();
         var uptime = formatUptime(process.uptime());
