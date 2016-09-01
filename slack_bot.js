@@ -210,7 +210,7 @@ controller.hears(['食べよう？','食べる？','what my lunch'], 'direct_mes
   if (rand == 2) msg = "イタリアン";
   if (rand == 3) msg = "アジア料理";
   if (rand == 4) msg = "喫茶店";
-  bot.reply(message,'うーんごはん・・・'+ msg +'なんてどうですか？');
+  bot.reply(message,'きょうのごはん:heart:！'+ msg +'なんてどうですか？');
 });
 
 controller.hears(['にゃ', 'meow'], 'direct_message,direct_mention,mention,ambient', function(bot, message) {
