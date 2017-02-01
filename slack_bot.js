@@ -272,45 +272,6 @@ controller.hears(['天気', 'てんき'], 'direct_message,direct_mention,mention
     });
 });
 
-controller.hears(['旅行先’], 'direct_message,direct_mention,mention,ambient’, function (bot, message) {
-    function getCity(prefecture) {
-        var http = require('http');
-        var urlCity = "http://geoapi.heartrails.com/api/json?method=getCities&prefecture="
-        var encodePrefecture = encodeURI(prefecture)
-        http.get(urlCity + encodePrefecture, function (res) {
-            res.setEncoding('utf8');
-            var body = “”;
-            res.on('data', function(data) {
-                body += data;
-            });
-            res.on('end', function(data) {
-                var c = JSON.parse(body);
-                cities = c.response.location;
-                city = cities[Math.floor(Math.random() * cities.length)];
-                bot.reply(message, ’’ + prefecture + city.city + ’ に行ってみましょう！:airplane_departure:’);
-            });
-        });
-    }
-function getPrefecture() {
-    var http = require('http');
-    var urlPrefecture = "http://geoapi.heartrails.com/api/json?method=getPrefectures";
-    http.get(urlPrefecture, function (res) {
-        res.setEncoding('utf8');
-        var body = "";
-        res.on('data', function(data) {
-            body += data;
-        });
-        res.on('end', function(data) {
-            var p = JSON.parse(body);
-            prefectures = p.response.prefecture;
-            pref = prefectures[Math.floor(Math.random() * prefectures.length)];
-            getCity(pref)
-        });
-    });
-}
-getPrefecture();
-});
-
 controller.hears(['説明', 'usage', '使い方'], 'direct_message,direct_mention,mention', function(bot, message) {
   bot.reply('せつめいしょです：https://github.com/tmtkg/memo/blob/master/20160830_catbot-usage.md');
 });
