@@ -244,6 +244,72 @@ controller.hears(['にゃ', 'meow'], 'direct_message,direct_mention,mention,ambi
     });
 });*/
 
+//source: http://bit.ly/2jD14ri
+controller.hears(['天気', 'てんき'], 'direct_message,direct_mention,mention', function (bot, message) {
+    bot.reply(message, "天気情報を取得しています...");
+    bot.startConversation(message, function (err, convo) {
+        var http = require('http');
+        http.get("http://weather.livedoor.com/forecast/webservice/json/v1?city=130010", function (result) {
+            var time = new Date();
+            var dateCond = time.getHours() < 18 ? "今日" : "明日";
+            var body = '';
+            result.setEncoding('utf8');
+            result.on('data', function(data) {
+                body += data;
+            });
+            result.on('end', function(data) {
+                var v = JSON.parse(body);
+                var weather = v.forecasts[0];
+                if (time.getHours() < 18) {
+                    var weather = v.forecasts[0];
+                } else {
+                    var weather = v.forecasts[1];
+                }
+                convo.say(weather.dateLabel + "の" + v.title + "は" + weather.telop + "です。最高気温は" + weather.temperature.max.celsius + "度です！");
+                convo.next();
+            });
+        });
+    });
+});
+
+controller.hears(['旅行先’], 'direct_message,direct_mention,mention,ambient’, function (bot, message) {
+    function getCity(prefecture) {
+        var http = require('http');
+        var urlCity = "http://geoapi.heartrails.com/api/json?method=getCities&prefecture="
+        var encodePrefecture = encodeURI(prefecture)
+        http.get(urlCity + encodePrefecture, function (res) {
+            res.setEncoding('utf8');
+            var body = “”;
+            res.on('data', function(data) {
+                body += data;
+            });
+            res.on('end', function(data) {
+                var c = JSON.parse(body);
+                cities = c.response.location;
+                city = cities[Math.floor(Math.random() * cities.length)];
+                bot.reply(message, ’’ + prefecture + city.city + ’ に行ってみましょう！:airplane_departure:’);
+            });
+        });
+    }
+function getPrefecture() {
+    var http = require('http');
+    var urlPrefecture = "http://geoapi.heartrails.com/api/json?method=getPrefectures";
+    http.get(urlPrefecture, function (res) {
+        res.setEncoding('utf8');
+        var body = "";
+        res.on('data', function(data) {
+            body += data;
+        });
+        res.on('end', function(data) {
+            var p = JSON.parse(body);
+            prefectures = p.response.prefecture;
+            pref = prefectures[Math.floor(Math.random() * prefectures.length)];
+            getCity(pref)
+        });
+    });
+}
+getPrefecture();
+});
 
 controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your name'],
     'direct_message,direct_mention,mention,ambient', function(bot, message) {
