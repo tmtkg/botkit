@@ -247,11 +247,11 @@ controller.hears(['にゃ', 'meow'], 'direct_message,direct_mention,mention,ambi
 //これ実装したい: http://bit.ly/2jD14ri
 
 controller.hears(['説明', 'usage', '使い方'], 'direct_message,direct_mention,mention', function(bot, message) {
-  bot.reply(message, 'せつめいしょです：https://github.com/tmtkg/memo/blob/master/catbot-usage.md');
+  bot.reply(message, 'せつめいしょです：https://gist.github.com/tmtkg/0729134a2532cff9c70b70b2c3ff8c4e');
 });
 
 controller.hears(['作り方', 'How to make'], 'direct_message,direct_mention,mention', function(bot, message) {
-  bot.reply(message, 'botのつくりかたです：https://github.com/tmtkg/memo/blob/master/botkit.md');
+  bot.reply(message, 'botのつくりかたです：https://gist.github.com/tmtkg/962f555de1bb72fab09f5d0b14cbdba9');
 });
 
 controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your name'],
