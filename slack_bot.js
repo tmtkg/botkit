@@ -254,6 +254,10 @@ controller.hears(['作り方', 'How to make'], 'direct_message,direct_mention,me
   bot.reply(message, 'botのつくりかたです：https://gist.github.com/tmtkg/962f555de1bb72fab09f5d0b14cbdba9');
 });
 
+controller.hears(['居酒屋', '飲み会', '飲み屋'], 'direct_message,direct_mention,mention', function(bot, message) {
+  bot.reply(message, '使えそうな飲み屋さんリストです：https://gist.github.com/tmtkg/2c0ffe3e747c531068d9cc42a50fa8e9');
+});
+
 controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your name'],
     'direct_message,direct_mention,mention,ambient', function(bot, message) {
 
