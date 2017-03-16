@@ -259,16 +259,8 @@ controller.hears(['居酒屋', '飲み会', '飲み屋'], 'direct_message,direct
 });
 
 controller.hears(['big ok'], 'direct_message,direct_mention,mention', function(bot, message) {
-  bot.reply(message, '_　　　　　  /j^i
-　　　　　 ./　 ;!
-　　　　　/　 /_＿,,..
-　　　　/　　`(_t＿,__〕
-　　　 /　　　 '(_t＿,__〕
-　　　/　　　　｛_i＿,__〕
-　 ／　　　 ノ　 {_i＿_〉
-／　　　　　　＿,..-'"
-　　　　　　／');
-});
+  bot.reply(message, '_　　　　　  /j^i\n　　　　　 ./　 ;!\n　　　　　/　 /_＿,,..\n　　　　/　　`(_t＿,__〕\n　　　 /　　　 '(_t＿,__〕\n　　　/　　　　｛_i＿,__〕
+　 ／　　　 ノ　 {_i＿_〉\n／　　　　　　＿,..-'"\n　　　　　　／');});
 
 
 controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your name'],
