@@ -258,11 +258,6 @@ controller.hears(['居酒屋', '飲み会', '飲み屋'], 'direct_message,direct
   bot.reply(message, '使えそうな飲み屋さんリストです：https://gist.github.com/tmtkg/2c0ffe3e747c531068d9cc42a50fa8e9');
 });
 
-controller.hears(['big ok'], 'direct_message,direct_mention,mention', function(bot, message) {
-  bot.reply(message, '_　　　　　  /j^i\n　　　　　 ./　 ;!\n　　　　　/　 /_＿,,..\n　　　　/　　`(_t＿,__〕\n　　　 /　　　 '(_t＿,__〕\n　　　/　　　　｛_i＿,__〕
-　 ／　　　 ノ　 {_i＿_〉\n／　　　　　　＿,..-'"\n　　　　　　／');});
-
-
 controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your name'],
     'direct_message,direct_mention,mention,ambient', function(bot, message) {
 
@@ -272,8 +267,7 @@ controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your na
         bot.reply(message,
             ':heart_eyes_cat: わたしの名前は <@' + bot.identity.name +
              '>です！ 稼働時間は ' + uptime + ' で、 ' + hostname + 'で動いていますよ！');
-
-    });
+});
 
 function formatUptime(uptime) {
     var unit = 'second';
